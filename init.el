@@ -81,7 +81,8 @@
 ;;; IDE
 (use-package expand-region
   :bind ("C-=" . 'er/expand-region))
-(use-package smartparens)
+(use-package smartparens
+  :config (require 'smartparens-config))
 (use-package projectile)		;Not sure if I like this package
 
 (use-package flycheck)
