@@ -21,7 +21,7 @@
 ;;; packages
 
 (require 'package)
-
+(setq package-native-compile t)
 
 (add-to-list 'package-archives
              (cons "melpa" "https://melpa.org/packages/")
@@ -80,7 +80,9 @@
 
 ;;; IDE
 (use-package expand-region
-  :bind ("C-=" . 'er/expand-region))
+  :bind
+  ("C-=" . 'er/expand-region)
+  ("C--" . 'er/contract-region))
 (use-package smartparens
   :config (require 'smartparens-config))
 (use-package projectile)		;Not sure if I like this package
