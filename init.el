@@ -88,6 +88,10 @@
 (use-package projectile)		;Not sure if I like this package
 
 (use-package flycheck)
+(use-package diff-hl
+  :config
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 (use-package lsp-mode
   :config
   (setq lsp-diagnostics-provider :flycheck)
