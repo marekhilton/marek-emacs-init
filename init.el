@@ -133,6 +133,9 @@
 	      ("C-c C-c" . 'sharper-main-transient)))
 
 
+;;; Input
+(use-package pyim)
+
 ;;; Temporary packages
 (add-to-list 'load-path "~/workspace/projects/emacs/gutenmacs")
 (require 'gutenmacs)
