@@ -5,10 +5,6 @@
                                (setq gc-cons-threshold 800000)))
 
 ;;; prettify
-;;(setq inhibit-startup-buffer-menu t)
-;;(setq inhibit-startup-screen t)
-;;(setq inhibit-startup-echo-area-message "locutus")
-;;(setq initial-buffer-choice t)
 (setq initial-scratch-message "")
 
 (scroll-bar-mode 0)
@@ -20,36 +16,29 @@
 
 ;;; packages
 
-(require 'package)
-(setq package-native-compile t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(add-to-list 'package-archives
-             (cons "melpa" "https://melpa.org/packages/")
-             t)
-(add-to-list 'package-archives
-             (cons "org" "https://orgmode.org/elpa/")
-             t)
 
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-;  (delete-directory package-user-dir t)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
-(setq use-package-always-ensure t)
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 (setq use-package-always-defer t)
+
 (require 'bind-key)
-;(require 'diminish)
 
+(use-package dash)
 
-(use-package dash
-  :ensure t)
-
-(use-package f
-  :demand)
+(use-package f)
 
 (use-package auto-compile
   :config
@@ -66,13 +55,12 @@
 
 (use-package hydra)
 
-
 ;;; utils
 (use-package magit
   :config (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 (use-package lisp-mode
-  :ensure nil
+  :straight nil
   :config
   (add-hook 'emacs-lisp-mode-hook 'company-mode)
   (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -87,22 +75,31 @@
   :config (require 'smartparens-config))
 (use-package projectile)		;Not sure if I like this package
 
-(use-package flycheck)
+(use-package flycheck
+  :config
+  (setq checkdoc-force-docstrings-flag nil))
+
 (use-package diff-hl
+  :hook ((lsp-mode . diff-hl-mode)
+	 (diff-hl-mode . diff-hl-flydiff-mode))
   :config
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 (use-package lsp-mode
   :config
   (setq lsp-diagnostics-provider :flycheck)
-  (setq lsp-eldoc-render-all t))
+  (setq lsp-eldoc-render-all nil))
+
+
 (use-package lsp-ui
   :config
   (setq lsp-ui-doc-enable nil)
   (setq lsp-ui-imenu-enable nil)
   (setq lsp-ui-peek-enable nil)
   (setq lsp-ui-sideline-enable nil))
-(use-package company)
+(use-package company
+  :config
+  (setq company-minimum-prefix-length 0))
 (use-package company-quickhelp)
 (use-package company-lsp)
 
@@ -132,6 +129,17 @@
   :bind (:map fsharp-mode-map
 	      ("C-c C-c" . 'sharper-main-transient)))
 
+;;; XML ;; should probably tidy up config
+(use-package nxml-mode
+  :straight nil
+  :config
+  (add-to-list 'auto-mode-alist '("\\.xa?ml\\'" . nxml-mode))
+  (add-to-list 'auto-mode-alist '("\\.fsproj\\'" . nxml-mode))
+  (add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode)))
+
+;;; LaTeX
+(use-package auctex)
+
 
 ;;; Input
 (use-package pyim)
@@ -147,7 +155,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(leuven))
  '(package-selected-packages
-   '(smartparens expand-region exec-path-from-shell dash fzf promise direx hydra request fuzzy-finder ace-jump-mode projectile curl-to-elisp sed-mode sharper use-package)))
+   '(auctex diff-hl pyim smartparens expand-region exec-path-from-shell dash fzf promise direx hydra request fuzzy-finder ace-jump-mode projectile curl-to-elisp sed-mode sharper use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
