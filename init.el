@@ -2,7 +2,7 @@
 (setq gc-cons-threshold 64000000)
 (add-hook 'after-init-hook #'(lambda ()
                                ;; restore after startup
-                               (setq gc-cons-threshold 800000)))
+                               (setq gc-cons-threshold 8000000)))
 
 ;;; prettify
 (setq initial-scratch-message "")
