@@ -39,7 +39,10 @@
 
 (use-package dired
   :straight nil
-  :config (put 'dired-find-alternate-file 'disabled nil))
+  :config
+  (put 'dired-find-alternate-file 'disabled nil)
+  (setq dired-auto-revert-buffer t)
+  (setq dired-recursive-copies 'always))
 
 (use-package dash)
 
