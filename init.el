@@ -138,8 +138,14 @@
   (add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode)))
 
 ;;; LaTeX
-(use-package auctex)
-
+(use-package tex
+  :straight auctex
+  :config (require 'lsp-latex)
+  :hook ((TeX-latex-mode . lsp-deferred)
+	 (TeX-mode . lsp-deferred)))
+(use-package lsp-latex
+  :config
+  (add-to-list 'lsp-latex-build-args "-pvc"))
 
 ;;; Input
 (use-package pyim)
