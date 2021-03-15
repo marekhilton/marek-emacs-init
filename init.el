@@ -37,7 +37,9 @@
 (setq straight-use-package-by-default t)
 (setq use-package-always-defer t)
 
-(require 'bind-key)
+(use-package dired
+  :straight nil
+  :config (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package dash)
 
@@ -157,4 +159,4 @@
 (add-to-list 'load-path "~/workspace/projects/emacs/gutenmacs")
 (require 'gutenmacs)
 
-(put 'dired-find-alternate-file 'disabled nil)
+
