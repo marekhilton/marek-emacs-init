@@ -140,7 +140,7 @@
 ;;; XML ;; should probably tidy up config
 (use-package nxml-mode
   :straight nil
-  :config
+  :init
   (add-to-list 'auto-mode-alist '("\\.xa?ml\\'" . nxml-mode))
   (add-to-list 'auto-mode-alist '("\\.fsproj\\'" . nxml-mode))
   (add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode)))
