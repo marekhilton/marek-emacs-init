@@ -63,9 +63,16 @@
 
 (use-package hydra)
 
+(use-package auth-source
+  :straight nil
+  :config (setq auth-sources '(password-store)))
+
 ;;; utils
 (use-package magit
   :config (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
+
+(use-package forge
+  :after magit)
 
 (use-package lisp-mode
   :straight nil
