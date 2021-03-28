@@ -157,7 +157,9 @@
   :straight auctex
   :config (require 'lsp-latex)
   :hook ((TeX-latex-mode . lsp-deferred)
-	 (TeX-mode . lsp-deferred)))
+	 (TeX-mode . lsp-deferred)
+	 (TeX-latex-mode . flyspell-mode)
+	 (TeX-mode . flyspell-mode)))
 (use-package lsp-latex
   :config
   (add-to-list 'lsp-latex-build-args "-pvc"))
