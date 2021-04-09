@@ -17,6 +17,9 @@
 (setq custom-enabled-themes '(leuven))
 (load-theme 'leuven)
 
+;;; Key binds
+(global-set-key (kbd "C-<backspace>") 'kill-word)
+
 ;;; packages
 
 (defvar bootstrap-version)
