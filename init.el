@@ -14,6 +14,8 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+(setq-default truncate-lines t)
+
 (setq custom-enabled-themes '(leuven))
 (load-theme 'leuven)
 
@@ -46,6 +48,9 @@
   (put 'dired-find-alternate-file 'disabled nil)
   (setq dired-auto-revert-buffer t)
   (setq dired-recursive-copies 'always))
+
+(use-package superword
+  :straight nil)
 
 (use-package dash)
 
@@ -162,7 +167,9 @@
   :hook ((TeX-latex-mode . lsp-deferred)
 	 (TeX-mode . lsp-deferred)
 	 (TeX-latex-mode . flyspell-mode)
-	 (TeX-mode . flyspell-mode)))
+	 (TeX-mode . flyspell-mode)
+	 (TeX-latex-mode . auto-fill-mode)
+	 (TeX-mode . auto-fill-mode)))
 (use-package lsp-latex
   :config
   (add-to-list 'lsp-latex-build-args "-pvc"))
