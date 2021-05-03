@@ -21,6 +21,7 @@
 
 ;;; Key binds
 (global-set-key (kbd "C-<backspace>") 'kill-word)
+(windmove-default-keybindings)
 
 ;;; packages
 
@@ -141,6 +142,7 @@
   :config
   (add-hook 'fsharp-mode-hook 'lsp)
   (add-hook 'fsharp-mode-hook 'company-quickhelp-mode)
+  (add-hook 'fsharp-mode-hook 'subword-mode)
   (setq lsp-fsharp-server-install-dir
 	"~/.fsharp/FsAutoComplete/bin/release_netcore/")
   (setq inferior-fsharp-program
