@@ -98,6 +98,7 @@
 (use-package smartparens
   :config (require 'smartparens-config))
 (use-package projectile)		;Not sure if I like this package
+(use-package whitespace-cleanup-mode)
 
 (use-package flycheck
   :config
@@ -143,6 +144,7 @@
   (add-hook 'fsharp-mode-hook 'lsp)
   (add-hook 'fsharp-mode-hook 'company-quickhelp-mode)
   (add-hook 'fsharp-mode-hook 'subword-mode)
+  (add-hook 'fsharp-mode-hook 'whitespace-cleanup-mode)
   (setq lsp-fsharp-server-install-dir
 	"~/.fsharp/FsAutoComplete/bin/release_netcore/")
   (setq inferior-fsharp-program
