@@ -156,13 +156,17 @@
   :bind (:map fsharp-mode-map
 	      ("C-c C-c" . 'sharper-main-transient)))
 
+;;; CSharp
+(use-package csharp-mode)
+
 ;;; XML ;; should probably tidy up config
 (use-package nxml-mode
   :straight nil
   :init
   (add-to-list 'auto-mode-alist '("\\.xa?ml\\'" . nxml-mode))
   (add-to-list 'auto-mode-alist '("\\.fsproj\\'" . nxml-mode))
-  (add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode)))
+  (add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode))
+  :bind (:map nxml-mode-map ("C-c C-c" . 'sharper-main-transient)))
 
 ;;; LaTeX
 (use-package tex
@@ -181,8 +185,13 @@
 ;;; Input
 (use-package pyim)
 
+
+;;; Misc
+
+
 ;;; Temporary packages
 (add-to-list 'load-path "~/workspace/projects/emacs/gutenmacs")
 (require 'gutenmacs)
 
 
+(put 'downcase-region 'disabled nil)
