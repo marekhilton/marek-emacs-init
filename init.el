@@ -42,6 +42,7 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 (setq use-package-always-defer t)
+(setq erc-join-buffer 'bury)
 
 (use-package dired
   :straight nil
