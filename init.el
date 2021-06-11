@@ -14,8 +14,6 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
-(setq-default truncate-lines t)
-
 (setq custom-enabled-themes '(leuven))
 (load-theme 'leuven)
 
