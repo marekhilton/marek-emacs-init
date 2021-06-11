@@ -186,7 +186,18 @@
 
 
 ;;; Misc
-
+(use-package circe
+  :config
+  (setq circe-network-options
+      '(("Libera"
+	 :tls t
+	 :host "irc.libera.chat"
+         :nick "sifu"
+         ;; :sasl-username "marek"
+         ;; :sasl-password "my-password"
+	 :port "7070"
+	 :channels ("#emacs" "#archlinux" "#haskell" "#lisp" "##math")
+         ))))
 
 ;;; Temporary packages
 (add-to-list 'load-path "~/workspace/projects/emacs/gutenmacs")
